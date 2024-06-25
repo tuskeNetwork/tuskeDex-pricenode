@@ -1,0 +1,10 @@
+pluginManagement {
+    repositories {
+        gradlePluginPortal()
+    }
+    includeBuild('haveno-gradle')
+}
+rootProject.name = 'haveno-pricenode'
+
+includeBuild('haveno')
+include 'platform'

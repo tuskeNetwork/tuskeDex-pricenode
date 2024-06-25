@@ -1,0 +1,8 @@
+.gradle
+.idea
+.settings
+bin
+build
+haveno-pricenode
+haveno-pricenode.bat
+lib

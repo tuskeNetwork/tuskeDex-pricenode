@@ -1,0 +1,82 @@
+plugins {
+    id 'application'
+    alias(libs.plugins.springboot)
+    id 'haveno.post-build'
+}
+
+repositories {
+    mavenCentral()
+    maven { url 'https://jitpack.io' }
+}
+
+group 'haveno'
+
+apply plugin: "org.springframework.boot"
+apply plugin: 'io.spring.dependency-management'
+
+version = file("src/main/resources/version.txt").text.trim()
+
+application {
+    project.mainClassName = 'haveno.price.Main'
+}
+
+java {
+    toolchain {
+        languageVersion.set(JavaLanguageVersion.of(21))
+    }
+}
+
+jar.manifest.attributes(
+        "Implementation-Title": project.name,
+        "Implementation-Version": version
+)
+
+configurations.all {
+    exclude group: 'haveno', module: 'proto'
+    exclude group: 'haveno', module: 'p2p'
+    exclude group: 'com.github.haveno-dex:bitcoinj'
+    exclude group: 'com.github.haveno-dex.netlayer'
+    exclude group: 'com.github.haveno-dex.tor-binary'
+    exclude group: 'io.grpc'
+    exclude group: 'org.fxmisc.easybind'
+}
+
+dependencies {
+    implementation enforcedPlatform(project(':platform'))
+
+    // We need three subprojects from includeBuild('bisq'), with some of their transitive dependencies.
+    implementation 'haveno:assets'
+    implementation 'haveno:common'
+    implementation 'haveno:core'
+
+    implementation libs.bundles.knowm.xchange.libs
+
+    implementation libs.logback.core
+    implementation libs.logback.classic
+    compileOnly libs.lombok
+    annotationProcessor libs.lombok
+    implementation libs.slf4j.api
+
+    implementation(libs.spring.boot.starter.web) {
+        exclude group: 'ch.qos.logback'
+        exclude group: 'org.slf4j'
+    }
+    implementation(libs.spring.boot.starter.webflux)
+    implementation libs.javax
+
+    implementation 'io.netty:netty-all'
+
+    testAnnotationProcessor libs.lombok
+    testCompileOnly libs.lombok
+    testImplementation libs.junit.jupiter
+    testImplementation libs.mockito.core
+}
+
+clean.doFirst {
+    // Remove the project root level 'haveno-*' scripts and 'lib' dir generated at the end of the assemble task.
+    delete fileTree(dir: projectDir, include: ['haveno-pricenode', 'haveno-pricenode.bat']), 'lib'
+}
+
+test {
+    useJUnitPlatform()
+}
