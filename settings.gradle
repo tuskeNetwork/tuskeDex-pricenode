@@ -2,9 +2,9 @@ pluginManagement {
     repositories {
         gradlePluginPortal()
     }
-    includeBuild('haveno-gradle')
+    includeBuild('tuskeDex-gradle')
 }
-rootProject.name = 'haveno-pricenode'
+rootProject.name = 'tuskeDex-pricenode'
 
-includeBuild('haveno')
+includeBuild('tuskeDex')
 include 'platform'
