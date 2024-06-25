@@ -1,7 +1,7 @@
 plugins {
     id 'application'
     alias(libs.plugins.springboot)
-    id 'haveno.post-build'
+    id 'tuskeDex.post-build'
 }
 
 repositories {
@@ -73,8 +73,8 @@ dependencies {
 }
 
 clean.doFirst {
-    // Remove the project root level 'haveno-*' scripts and 'lib' dir generated at the end of the assemble task.
-    delete fileTree(dir: projectDir, include: ['haveno-pricenode', 'haveno-pricenode.bat']), 'lib'
+    // Remove the project root level 'tuskeDex-*' scripts and 'lib' dir generated at the end of the assemble task.
+    delete fileTree(dir: projectDir, include: ['tuskeDex-pricenode', 'tuskeDex-pricenode.bat']), 'lib'
 }
 
 test {
