@@ -1,6 +1,7 @@
 .gradle
 .idea
 .settings
+.vs
 bin
 build
 haveno-pricenode
