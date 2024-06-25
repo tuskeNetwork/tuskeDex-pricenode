@@ -4,3 +4,6 @@
 [submodule "haveno"]
 	path = haveno
 	url = https://github.com/haveno-dex/haveno.git
+[submodule "tuskeDex-gradle"]
+	path = tuskeDex-gradle
+	url = https://github.com/tuskeNetwork/tuskeDex-gradle.git
