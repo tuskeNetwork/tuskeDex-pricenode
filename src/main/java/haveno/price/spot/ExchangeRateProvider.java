@@ -136,7 +136,7 @@ public abstract class ExchangeRateProvider extends PriceProvider<Set<ExchangeRat
                     .map(TradeCurrency::getCode)
                     .filter(ccy -> !validatedExclusionList.contains(ccy.toUpperCase()))
                     .collect(Collectors.toSet());
-            SUPPORTED_CRYPTO_CURRENCIES.add("XMR"); // XMR is skipped because it's a base currency
+            SUPPORTED_CRYPTO_CURRENCIES.add("TSK"); // XMR is skipped because it's a base currency
             log.info("crypto currencies excluded: {}", validatedExclusionList);
             log.info("crypto currencies supported: {}", SUPPORTED_CRYPTO_CURRENCIES.size());
         }
@@ -176,7 +176,7 @@ public abstract class ExchangeRateProvider extends PriceProvider<Set<ExchangeRat
     @Override
     protected void onRefresh() {
         get().stream()
-                .filter(e -> "USD".equals(e.getCounterCurrency()) || "XMR".equals(e.getBaseCurrency()) || "ETH".equals(e.getBaseCurrency()) || "BCH".equals(e.getBaseCurrency()))
+                .filter(e -> "USD".equals(e.getCounterCurrency()) || "TSK".equals(e.getBaseCurrency()) || "ETH".equals(e.getBaseCurrency()) || "BCH".equals(e.getBaseCurrency()))
                 .forEach(e -> log.info("{}/{}: {}", e.getBaseCurrency(), e.getCounterCurrency(), e.getPrice()));
     }
 
