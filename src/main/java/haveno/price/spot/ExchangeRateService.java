@@ -121,7 +121,7 @@ class ExchangeRateService {
 
     private ExchangeRate translateExchangeRateToXmr(ExchangeRate rate, Map<String, Map<String, ExchangeRate>> aggregateRates) {
         String BTC = "BTC";
-        String XMR = "XMR";
+        String XMR = "TSK";
         String USD = "USD";
 
         // invert XMR/BTC rate because XMR is counter currency for crypto pairs
@@ -155,7 +155,7 @@ class ExchangeRateService {
                     return null;
                 }
                 if (xmrBtcRate == null) {
-                    log.warn("No XMR/BTC rate available");
+                    log.warn("No TSK/BTC rate available");
                     return null;
                 }
                 return new ExchangeRate(
@@ -169,7 +169,7 @@ class ExchangeRateService {
                 
                 // convert xmr to usd to crypto
                 if (xmrUsdRate == null) {
-                    log.warn("No XMR/USD rate available");
+                    log.warn("No TSK/USD rate available");
                     return null;
                 }
                 return new ExchangeRate(
